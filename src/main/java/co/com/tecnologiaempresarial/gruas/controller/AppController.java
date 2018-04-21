@@ -13,7 +13,7 @@ import co.com.tecnologiaempresarial.gruas.entity.Clientes;
 import co.com.tecnologiaempresarial.gruas.service.IClientesService;
 
 @Controller
-@RequestMapping(path="/demo")
+@RequestMapping("gruas")
 public class AppController {
 
 	@Autowired
