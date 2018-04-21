@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import co.com.tecnologiaempresarial.gruas.entity.Clientes;
 
-public interface ClientesRepository extends CrudRepository<Clientes, Long>{	
+public interface ClientesRepository extends CrudRepository<Clientes, Long>{
 
 }
