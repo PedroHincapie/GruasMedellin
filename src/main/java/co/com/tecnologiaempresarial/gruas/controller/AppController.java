@@ -1,20 +1,19 @@
 package co.com.tecnologiaempresarial.gruas.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import co.com.tecnologiaempresarial.gruas.entity.Clientes;
 import co.com.tecnologiaempresarial.gruas.service.IClientesService;
@@ -45,28 +44,11 @@ public class AppController {
 
 
 	@RequestMapping(value = "cliente", method = RequestMethod.POST)
-	public void createStudent(@RequestBody Clientes cliente) {
-		System.err.println("Pedro :" + cliente.toString());
-		Clientes cli = clienteService.saveCliente(cliente);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(cli.getId_cliente()).toUri();
-
-
-	}
-
-	@PutMapping("clientes/{id}")
-	public ResponseEntity<Object> updateStudent(@RequestBody Clientes student, @PathVariable long id) {
-
-		Clientes studentOptional = clienteService.getClienteById(id);
-
-		if (studentOptional.getId_cliente() != id)
-			return ResponseEntity.notFound().build();
-
-		student.setId_cliente(id);
-
-		clienteService.saveCliente(student);
-
-		return ResponseEntity.noContent().build();
-	}
+	public ResponseEntity<Void> createStudent(@RequestBody Clientes cliente, UriComponentsBuilder builder) {
+		Clientes article = clienteService.saveCliente(cliente);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(builder.path("/cliente/{id}").buildAndExpand(article.getId_cliente()).toUri());
+		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+	}	
 
 }
