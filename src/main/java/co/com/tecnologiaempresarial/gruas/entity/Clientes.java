@@ -12,14 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clientes")
 public class Clientes implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Clientes() {
 		super();	
 	}
-	
-	public Clientes(int id_cliente, String nom_cliente, String telefono) {
+
+	public Clientes(Long id_cliente, String nom_cliente, String telefono) {
 		super();
 		this.id_cliente = id_cliente;
 		this.nom_cliente = nom_cliente;
@@ -29,19 +29,19 @@ public class Clientes implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_cliente")
-	private int id_cliente;
-	
+	private Long id_cliente;
+
 	@Column(name = "nom_cliente")	
 	private String nom_cliente;
-	
+
 	@Column(name = "telefono")	
 	private String telefono;
 
-	public int getId_cliente() {
+	public Long getId_cliente() {
 		return id_cliente;
 	}
 
-	public void setId_cliente(int id_cliente) {
+	public void setId_cliente(Long id_cliente) {
 		this.id_cliente = id_cliente;
 	}
 
